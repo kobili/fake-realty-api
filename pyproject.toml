@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "python-address-generation"
+version = "0.1.0"
+description = ""
+authors = ["Kobe Li <likobe23@gmail.com>"]
+readme = "README.md"
+packages = [{include = "python_address_generation"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+faker = "^19.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
