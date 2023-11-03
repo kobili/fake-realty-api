@@ -1,53 +1,12 @@
-from random import randint
-from string import ascii_uppercase, digits
-
 from faker import Faker
-from faker.providers import BaseProvider
+from providers.providers import AddressFakerProvider, PropertyFakerProvider
 
-faker = Faker()
-
-class PropertyFakerProvider(BaseProvider):
-    def street_number(self):
-        return randint(100, 999)
-    
-    def street_type(self):
-        types = ["St", "Dr", "Ave", "Blvd"]
-        idx = randint(0, len(types)-1)
-        return types[idx]
-    
-    def unit_number(self):
-        apartment = randint(1, 100) < 50
-        
-        return "" if not apartment else str(randint(1, 5000))
-    
-    def province(self):
-        provinces = [
-            "British Columbia",
-            "Alberta",
-            "Ontario",
-            "Quebec",
-            "Nova Scotia",
-            "New Brunswick",
-            "Manitoba",
-            "Prince Edward Island",
-            "Saskatchewan",
-            "Newfoundland and Laborador",
-        ]
-
-        return provinces[randint(0, len(provinces)-1)]
-    
-    def post_code(self):
-        return f"{self._random_upper()}{self._random_digit()}{self._random_upper()} {self._random_digit()}{self._random_upper()}{self._random_digit()}"
-    
-    def _random_upper(self):
-        return ascii_uppercase[randint(0, len(ascii_uppercase)-1)]
-    def _random_digit(self):
-        return digits[randint(0, len(digits)-1)]
-    
-faker.add_provider(PropertyFakerProvider)
 
 class Address:
     def __init__(self):
+        faker = Faker()
+        faker.add_provider(AddressFakerProvider)
+
         self.address_line_1 = f"{faker.street_number()} {faker.name()} {faker.street_type()}"
         self.address_line_2 = ""
         self.unit_number = faker.unit_number()
@@ -70,13 +29,38 @@ class Address:
 
 class Property:
     def __init__(self):
+        faker = Faker()
+        faker.add_provider(PropertyFakerProvider)
+
+        self.mls = faker.mls()
+
+        monthly_rent, purchase_price = faker.prices()
+        self.monthly_rent = monthly_rent
+        self.purchase_price = purchase_price
+        # ^ one of these will be None
+
+        self.square_footage = faker.square_footage()
+        self.bedrooms = faker.bedroom_count()
+        self.bathrooms = faker.bathroom_count()
+
+        self.title = faker.title()
+        self.amenities = faker.amenities()
+
         self.address = Address()
     
     def to_dict(self):
         return {
+            "mls": self.mls,
+            "monthly_rent": self.monthly_rent,
+            "purchase_price": self.purchase_price,
             "address": self.address.to_dict(),
+            "square_footage": self.square_footage,
+            "bedrooms": self.bedrooms,
+            "bathrooms": self.bathrooms,
+            "title": self.title,
+            "amenities": self.amenities,
         }
 
-for i in range(0, 5):
+for i in range(0, 1):
     prop = Property()
     print(prop.to_dict())
