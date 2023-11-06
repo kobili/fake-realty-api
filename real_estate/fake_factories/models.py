@@ -1,6 +1,6 @@
-from fake_factories import Faker
+from faker import Faker
 
-from fake_factories.providers import AddressFakerProvider, PropertyFakerProvider
+from .providers import AddressFakerProvider, PropertyFakerProvider
 
 class Address:
     def __init__(self):

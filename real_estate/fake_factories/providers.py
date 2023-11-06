@@ -1,7 +1,7 @@
 from random import randint, uniform as rand_uniform, choice
 from string import ascii_uppercase, digits
 
-from fake_factories.providers import BaseProvider
+from faker.providers import BaseProvider
 
 
 def random_upper():
