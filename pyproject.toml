@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "python-address-generation"
+name = "fake-realty-api"
 version = "0.1.0"
 description = ""
 authors = ["Kobe Li <likobe23@gmail.com>"]
 readme = "README.md"
-packages = [{include = "python_address_generation"}]
+packages = [{include = "fake_realty_api"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
