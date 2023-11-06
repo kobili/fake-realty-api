@@ -1,7 +1,7 @@
 from random import randint, uniform as rand_uniform, choice
 from string import ascii_uppercase, digits
 
-from faker.providers import BaseProvider
+from fake_factories.providers import BaseProvider
 
 
 def random_upper():
@@ -19,7 +19,7 @@ class AddressFakerProvider(BaseProvider):
     def unit_number(self):
         apartment = randint(1, 100) < 50
 
-        return "" if not apartment else str(randint(1, 5000))
+        return None if not apartment else str(randint(1, 5000))
 
     def province(self):
         return choice([
