@@ -1,5 +1,5 @@
 from json import dumps as json_dumps
-from models import Property
+from faker import Property
 
 properties = {}
 
