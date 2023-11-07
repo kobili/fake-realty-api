@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.routers import DefaultRouter
+
+from real_estate.views import PropertyViewSet
+
+router = DefaultRouter()
+router.register(r"properties", PropertyViewSet, basename="property")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += router.urls
