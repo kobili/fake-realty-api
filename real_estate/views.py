@@ -11,5 +11,5 @@ class PropertyViewSet(
     ListModelMixin,
     GenericViewSet,
 ):
-    queryset = Property.objects.all()
+    queryset = Property.objects.select_related("address").all()
     serializer_class = PropertySerializer
