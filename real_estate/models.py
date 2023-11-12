@@ -12,6 +12,9 @@ class Address(models.Model):
     post_code = models.CharField(max_length=10)
     country = models.CharField(max_length=10, default="Canada")
 
+    class Meta:
+        verbose_name_plural = "addresses"
+
 
 class Property(models.Model):
     mls = models.CharField(primary_key=True, max_length=10)
@@ -23,3 +26,6 @@ class Property(models.Model):
     title = models.CharField(max_length=20, choices=PropertyTitleTypes.choices)
     amenities = models.JSONField()
     address = models.ForeignKey(to=Address, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "properties"
